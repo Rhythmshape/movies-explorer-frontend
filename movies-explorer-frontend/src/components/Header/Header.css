@@ -1,0 +1,58 @@
+.header__logo {
+  display: inline-block;
+  margin: 18px 0;
+  background-position: center;
+  min-width: 38px;
+  height: 38px;
+  transition: opacity 0.3s linear;
+  background: url(../../images/header_logo_.svg);
+  background-repeat: no-repeat;
+  background-size: cover;  
+}
+
+.header__logo:hover {
+  opacity: 0.8;
+}
+
+.header_color_white {
+  background-color: #FFFFFF;
+}
+
+.header_color_navy {
+  background-color: #073042
+}
+
+.header__container {
+  display: flex;
+  margin: 0 auto;
+  padding: 0 70px;
+  align-items: center;  
+}
+
+.header__container_movies {
+  justify-content: space-between;
+}
+
+.header__container_landing {
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 1023px) {
+  .header__container {
+    padding: 0 30px;
+  }
+
+  .header__container_movie {
+    justify-content: space-between;
+  }
+
+  .navigate__button-open {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .header__container {
+    padding: 0 14px;
+  }
+}

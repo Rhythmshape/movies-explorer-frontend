@@ -1,0 +1,90 @@
+.movie-card {
+  border-radius: 10px;
+  background-color: #FDFDFD;
+  box-shadow: 0 16px 24px 0 rgba(0, 0, 0, 0.05);
+}
+
+.movie-card__image {
+  margin-bottom: 14px;
+  min-width: 270px;
+  object-fit: cover;
+  height: 151px;  
+}
+
+.movie-card__title {
+  overflow: hidden;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;  
+  line-height: 1.23;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 225px; 
+}
+
+.movie-card__description {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  padding-bottom: 10px;  
+  width: calc(100% - 12px * 2);
+  justify-content: space-between;  
+}
+
+.movie-card__btn {
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  transition: opacity 0.3s linear;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;  
+  background-color: #F9F9F9;
+  box-shadow: 0 3px 6px 0 rgb(0 0 0 / 9%);
+  cursor: pointer;
+}
+
+.movie-card__btn:hover {
+  opacity: 0.8;
+}
+
+.movie-card__btn_save {
+  background-color: #2BE080;
+}
+
+.movie-card__btn_delete {
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s linear;
+  box-shadow: none;
+  margin-right: 2px;  
+  border-radius: 0;
+  background: url(../../images/btn_close_film.svg) no-repeat center;
+}
+
+.movie-card__btn_delete:hover {
+  opacity: 0.5;
+}
+
+.movie-card__time {
+  color: #A0A0A0;
+  margin: 0 auto 14px;
+  width: calc(100% - 12px * 2);
+  font-weight: 400;  
+  font-size: 11px;
+  line-height: 1.18;    
+}
+
+@media screen and (max-width: 990px) {
+  .movie-card__image {
+    margin-bottom: 14px;
+    width: 339px;  
+    height: 190px;      
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .movie-card__image {
+    height: 168px;
+    width: 300px;    
+  }
+}

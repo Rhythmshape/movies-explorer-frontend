@@ -19,7 +19,8 @@
 }
 
 .header_color_navy {
-  background-color: #073042
+  background-color: #073042;
+  color: #FFFFFF; 
 }
 
 .header__container {

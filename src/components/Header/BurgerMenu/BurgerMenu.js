@@ -22,10 +22,10 @@ function BurgerMenu({ isOpen, isClosed }) {
           </Link>
         </nav>
         <nav className='burger-menu__profile-link'>
-          <Link to='/profile' className='burger-menu__btn-profile'>
+          <Link to='/profile' className='burger-menu__btn-profile' onClick={isClosed}>
             Аккаунт
           </Link>
-          <Link to='/profile'  className='burger-menu__account-icon'/>
+          <Link to='/profile'  className='burger-menu__account-icon' onClick={isClosed}/>
         </nav>     
       </div>
     </div>

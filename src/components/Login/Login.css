@@ -27,7 +27,11 @@
 .login__logo:hover {
   opacity: 0.8;
 }
-
+/*
+.login__field {
+  padding-top:20px;
+}
+*/
 .login__form-content {
   margin: 0;
   padding: 0;
@@ -55,7 +59,9 @@
   font-weight: 500;
 }
 
-.login__label {
+
+.login__span {
+ 
   display: block;
   font-size: 10px;
   margin-bottom: 10px;
@@ -64,7 +70,28 @@
   color: #A0A0A0;
 }
 
-.login__submit-button {
+.login__input_type_error {
+  color: #FF3055;
+  margin-bottom: 10px;
+}
+
+.login__error {
+  
+  opacity: 0;
+  display: block;
+  color: #FF3055;
+  margin: 0;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;  
+}
+
+.login__error_visible {
+  opacity: 1;
+}
+
+.login__submit-btn {  
+  margin-top:179px;
   margin-bottom: 16px;
   border: none;
   transition: opacity 0.3s linear;
@@ -81,11 +108,17 @@
   cursor: pointer;  
 }
 
-.login__submit-button:hover {
+.login__submit-btn:disabled {
+  color: #c2c2c2;
+  background: #f8f8f8;
+  pointer-events: none;
+} 
+
+.login__submit-btn:hover {
   opacity: 0.8;
 }
 
-.login__submit-button:active {
+.login__submit-btn:active {
   transform: translateY(1px);
 }
 
@@ -118,15 +151,20 @@
   text-align: center;  
 }
 
-.login__form-field:last-of-type {
+.login__field:last-of-type {
   display: block;
-  margin-bottom: 159px;
+  /*margin-bottom: 159px;*/
 }
 
 @media screen and (max-width: 990px) {
   .login__container {
     padding: 232px 0;    
   }
+
+  /*.login__submit-btn {  
+    margin-top:179px;
+  }
+*/
 }
 
 @media screen and (max-width: 499px) {
@@ -142,8 +180,9 @@
     width: 38px;
   }
 
-  .login__form-field:last-of-type {
-    margin-bottom: 267px;  
+  .login__field:last-of-type {
+    /*margin-bottom: 267px;*/ 
+    /*margin-bottom: 90px;*/
   }
 
   .login__title {
@@ -151,10 +190,12 @@
     text-align: center;
   }
 
-  .login__submit-button {
+  .login__submit-btn {
     margin-bottom: 14px;
     line-height: 1.25;
-    font-size: 12px;    
+    font-size: 12px;  
+    
+    margin-top:257px;
   }
 
   .confirmation {

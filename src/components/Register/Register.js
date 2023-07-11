@@ -1,58 +1,89 @@
 import './Register.css';
 import { Link } from 'react-router-dom';
 
-function Register() {
+import { useValidation } from '../../hooks/useValidation';
+
+
+function Register(props) {
+  const controlInput = useValidation();
+  const { name, email, password } = controlInput.errors;
+
+  const errorRegisterClassName = !controlInput.isValid
+    ? 'register__error register__error_visible'
+    : 'register__error';  
+
+  const errorRegisterButtonClassName = props.isErrorRegisterButton
+    ? 'register__error register__error_visible'
+    : 'register__error';
+
+  const handleRegisterSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, password } = controlInput.values;
+    props.onRegister(name, email, password);
+    controlInput.resetForm();
+  };
+
+
   return (
-    <>
+    <> 
       <main className='register'>
         <div className='register__container'>
           <header className='register__header'>
             <Link to='/' className='register__logo'></Link>
             <h2 className='register__title'>Добро пожаловать!</h2>
           </header>
-          <form action='#' className='register__form'>
+          <form action='#' className='register__form' onSubmit={handleRegisterSubmit} noValidate>
             <fieldset className='register__content'>
-              <label className='register__form-field'>
-                <span className='register__label'>Имя</span>
+              <label className='register__field'>
+                <span className='register__span'>Имя</span>
                 <input
-                  type='text'
-                  name='text'
-                  placeholder='Алёна'
-                  autoComplete='off'
-                  minLength='5'
+                  name='name'
+                  type='text'         
+                  value={controlInput?.values?.name || ''}         
+                  placeholder='Введите имя'                                
+                  minLength='2'
                   maxLength='40'
-                  className='register__input'                  
+                  className={`register__input ${controlInput.errors.name ? 'register__input_type_error' : ''}`} 
+                  onChange={controlInput.handleChange}             
+                  autoComplete='off'    
                   required
                 />
+                <span className={errorRegisterClassName}>{name}</span>
               </label>
-              <label className='register__form-field'>
-                <span className='register__label'>E-mail</span>
+              <label className='register__field'>
+                <span className='register__span'>E-mail</span>
                 <input
-                  type='email'
                   name='email'
-                  placeholder='Email'
-                  className='register__input'
-                  autoComplete='off'                  
+                  type='email'        
+                  value={controlInput?.values?.email || ''}          
+                  placeholder='Введите Email'
+                  className={`register__input ${controlInput.errors.email ? 'register__input_type_error' : ''}`}                               
                   minLength='5'
                   maxLength='40'
+                  onChange={controlInput.handleChange}
+                  autoComplete='off'  
                   required
                 />
+                <span className={errorRegisterClassName}>{email}</span>
               </label>
-              <label className='register__form-field'>
-                <span className='register__label'>Пароль</span>
+              <label className='register__field'>
+                <span className='register__span'>Пароль</span>
                 <input
-                  type='password'
                   name='password'
-                  placeholder='Пароль'
-                  autoComplete='off'
-                  className='register__input register__input_type_error'
+                  type='password'
+                  value={controlInput?.values?.password || ''}                  
+                  placeholder='Введите пароль'                  
+                  className={`register__input ${controlInput.errors.password ? 'register__input_type_error' : ''}`} 
                   minLength='5'
                   maxLength='40'
+                  onChange={controlInput.handleChange}
+                  autoComplete='off'
                   required
                 />
-                <span className='register__error'>Что-то пошло не так...</span>
+                <span className={errorRegisterClassName}>{password}</span>
               </label>
-              <button type='submit' className='register__submit-button'>
+              <span className={errorRegisterButtonClassName}>{props.isRegisterMessage}</span>
+              <button className='register__submit-btn' type='submit'  disabled={!controlInput.isValid}>
                 Зарегистрироваться
               </button>
             </fieldset>
@@ -66,7 +97,7 @@ function Register() {
         </div>
       </main>
     </>
-  );
-}
+  )
+};
 
 export default Register;

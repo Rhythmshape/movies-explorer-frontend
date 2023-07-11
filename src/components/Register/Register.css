@@ -28,7 +28,7 @@
   padding: 0;
 }
 
-.register__label {
+.register__span {
   display: block;
   color: #A0A0A0;
   margin-bottom: 10px;
@@ -70,8 +70,13 @@
   font-weight: 500;
   opacity: 1;
 }
-
+/*
+.register__input:last-of-type {
+  margin-bottom: 10px;
+}
+*/
 .register__error {
+  opacity: 0;
   display: block;
   color: #FF3055;
   margin: 0;
@@ -80,8 +85,12 @@
   line-height: 12px;  
 }
 
-.register__submit-button {
-  margin: 69px 0 16px;
+.register__error_visible {
+  opacity: 1;
+}
+
+.register__submit-btn {
+  margin: 89px 0 16px;
   border: none;
   border-radius: 3px;
   width: 100%;
@@ -97,11 +106,17 @@
   transition: opacity 0.3s linear;
 }
 
-.register__submit-button:hover {
+.register__submit-btn:disabled {
+  color: #c2c2c2;
+  background: #f8f8f8;
+  pointer-events: none;
+}
+
+.register__submit-btn:hover {
   opacity: 0.8;
 }
 
-.register__submit-button:active {
+.register__submit-btn:active {
   transform: translateY(1px);
 }
 
@@ -132,6 +147,11 @@
   .register__container {
     padding-top: 232px;
   }
+/*
+  .register__submit-btn {
+    margin-top: 89px; 
+  }
+*/
 }
   
 @media screen and (max-width: 470px) {
@@ -151,15 +171,17 @@
     margin: 0 0 80px;
     text-align: center;
   }
-
+/*
   .register__error {
     margin-bottom: 157px;
   }
-
-  .register__submit-button {
+*/
+  .register__submit-btn {
     margin-bottom: 14px;
     line-height: 15px;
-    font-size: 12px;    
+    font-size: 12px;   
+
+    margin-top:167px; 
   }
 
   .confirmation {

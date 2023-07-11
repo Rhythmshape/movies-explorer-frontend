@@ -127,18 +127,12 @@ class MainApi {
     this._headers.Authorization = `Bearer ${localStorage.getItem('jwt')}`;
   }
 }
-/*
+
 const mainApi = new MainApi({
+  //url: 'http://localhost:3001'
   url: 'https://api.movies.khalina.nomoredomains.work',
-  headers: {
-    'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-    'Content-Type': 'application/json',
-  },
+  
 });
-*/
-const mainApi = new MainApi({
-  url: 'http://localhost:3001',
- 
-});
+
 
 export default mainApi;

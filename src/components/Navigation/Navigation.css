@@ -90,12 +90,12 @@
 .navigation__account-icon:hover {
   opacity: 0.8;
 }
-
+*/
 @media screen and (max-width: 768px) {
   .navigation {
     display: none;
   }
-
+/*
   .navigation-button-open {
     display: block;    
   }

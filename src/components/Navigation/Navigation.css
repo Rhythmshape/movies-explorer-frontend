@@ -1,11 +1,11 @@
-/*.navigation {
+.navigation {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   
 }
-*/
+
 .navigation_location_main {
   color:white;
 };

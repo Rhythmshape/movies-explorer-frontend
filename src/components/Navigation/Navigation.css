@@ -1,11 +1,11 @@
-.navigation {
+/*.navigation {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   
 }
-
+*/
 .navigation_location_main {
   color:white;
 };
@@ -13,7 +13,7 @@
 .navigation_location_movies {
   color: black;
 };
-
+/*
 .navigation__list {
   display: flex;
   list-style-type: none;
@@ -107,3 +107,4 @@
     height: 43px;
   }
 }
+*/

@@ -28,14 +28,15 @@ Movies Explorer - это интерактивная страница, на ко�
 - - /notfound - страница 404
 
 
-## Публичный IP: 51.250.76.251
+## Публичный IP: 
+   51.250.76.251
 
 ## Сcылка на макет Figma, по которому осуществлялась верстка:
-### https://disk.yandex.ru/d/DGTd-AujlaBR9g
+   https://disk.yandex.ru/d/DGTd-AujlaBR9g
 
 ## Ссылка на репозиторий проекта (level-3):
-### https://github.com/Rhythmshape/movies-explorer-frontend/pull/2
+   https://github.com/Rhythmshape/movies-explorer-frontend/pull/2
 
 ### Бэкенд:  api.movies.khalina.nomoredomains.work
 
-## Фронтенд сайта: https://movies.khalina.nomoredomains.work
+## Фронтенд сайта:  https://movies.khalina.nomoredomains.work

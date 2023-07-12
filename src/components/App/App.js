@@ -307,7 +307,7 @@ function App() {
           setIsErrorLoginButton(false);
           mainApi.getToken(res.token).then((res) => {
             if (res) {
-              setTimeout(() => navigate('/movies'), 700);
+              navigate('/movies');
               setIsLoggedIn(true);
             }
           });

@@ -357,6 +357,8 @@ function App() {
     setIsErrorLoginButton(false);
     setIsErrorRegisterButton(false);
     setMovies([]);    
+    setCheckedSavedMovies(false);
+    setChecked(false);
   };
 
   // показать успешность запроса об изменении данных пользователя

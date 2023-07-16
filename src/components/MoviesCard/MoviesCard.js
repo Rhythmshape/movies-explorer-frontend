@@ -15,10 +15,10 @@ function MoviesCard(props) {
   let min = Math.floor(duration % 60);
 
   const isSaved = props.savedMovies.some((m) => m.movieId === props.movie.id);
-  const isAllSaved = props.allSavedMovies.some((m) => m.movieId === props.movie.id);
+  //const isAllSaved = props.allSavedMovies.some((m) => m.movieId === props.movie.id);
 
   let likeButtonClassName =
-    isSaved || isAllSaved
+    isSaved /*||/* isAllSaved*/
       ? 'movie-card__btn movie-card__btn_save'
       : 'movie-card__btn';
 

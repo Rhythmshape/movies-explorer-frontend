@@ -266,6 +266,42 @@ function App() {
     setIsNotFound((!searchFilmArray.length && !isFailedServer) || !userSavedShortMovies.length);   
    
     return savedMovies;
+
+
+    /*
+    setSavedMovies(savedMovies);
+    localStorage.setItem('checkboxSavedMovies', checkedSavedMovies);
+    const userSavedMovies = savedMovies.filter((movie) => {
+      return movie.owner === currentUser._id;
+    });
+    const searchFilmArray = searchMovies(userSavedMovies, name);
+    setSavedMovies(searchFilmArray);
+    setIsNotFound(!searchFilmArray.length && !isFailedServer);
+    return savedMovies;
+    */
+    /*setLoading(true);
+    mainApi
+      .getSavedMovies()
+      .then((movies) => {
+        setLoading(true);*/
+        /*setAllSavedMovies(savedMovies);*/
+    
+        
+
+        
+        
+        //setTimeout(() => setLoading(false), 1000);
+     /* })
+      .catch((err) => {
+        console.log(err);
+        setIsFailedServer(true);
+        setLoading(false);
+       });*/
+/*
+    const searchFilmArray = searchMovies(allSavedMovies, name);
+    setSavedMovies(searchFilmArray);
+    setIsNotFound(!searchFilmArray.length || !isFailedServer);
+    setTimeout(() => setLoading(false), 1000);*/
   };
 
   // регистрация и переход в систему

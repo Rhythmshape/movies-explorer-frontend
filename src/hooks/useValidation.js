@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
 import isEmail from 'validator/es/lib/isEmail';
 
-export function useValidation() {
-  const [values, setValues] = useState({});
+export function useValidation(inputValues) {
+  const [values, setValues] = useState(inputValues);
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 

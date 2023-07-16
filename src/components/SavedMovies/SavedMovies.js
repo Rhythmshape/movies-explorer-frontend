@@ -29,6 +29,7 @@ function SavedMovies(props) {
         <MoviesCardList 
           movies={props.movies}
           savedMovies={props.savedMovies}
+          shortSavedMovies={props.shortSavedMovies}
           allSavedMovies={props.allSavedMovies}
           checked={props.checked}
           checkedSavedMovies={props.checkedSavedMovies}

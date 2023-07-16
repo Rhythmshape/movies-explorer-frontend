@@ -18,8 +18,12 @@ function Login(props) {
     e.preventDefault();
     const { email, password } = controlInput.values;
     props.onLogin(email, password);
-    controlInput.resetForm();
+    //controlInput.resetForm();
   };
+
+  const handleChangeForm = () => {
+    props.setIsOnEdit(false)
+  }
 
   return (
     <>
@@ -31,6 +35,7 @@ function Login(props) {
           </header>
           <form 
             action='#' 
+            onChange={handleChangeForm}
             onSubmit={handleLoginSubmit}
             className='login__form'            
             noValidate
@@ -72,7 +77,7 @@ function Login(props) {
               <button 
                 className='login__submit-btn'
                 type='submit'                 
-                disabled={!controlInput.isValid}
+                disabled={!controlInput.isValid || props.isOnEdit}
               >
                   Войти
               </button>

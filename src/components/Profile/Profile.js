@@ -2,7 +2,7 @@ import Header from '../Header/Header';
 import MoviesHeader from '../Header/MoviesHeader/MoviesHeader';
 import './Profile.css';
 
-import { useState, useContext} from 'react';
+import { useContext, useEffect} from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import { useValidation } from '../../hooks/useValidation';
@@ -10,25 +10,26 @@ import { useValidation } from '../../hooks/useValidation';
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
 
-  const [isEditProfileInput, setIsEditProfileInput] = useState(true);
-
-  const controlInput = useValidation();
+  const controlInput = useValidation({name: '', value: ''});
   const handleInputValidation = controlInput.handleChange;
 
   const errorProfileClassName = !controlInput.isValid
   ? 'profile__error profile__error_visible'
   : 'profile__error';
 
-  let disableUserCurrentCheck =
+  const disableUserCurrentCheck =
   (currentUser.name === controlInput?.values?.name &&
-     controlInput?.values?.email === 'null') ||
+     controlInput?.values?.email === '') ||
   (currentUser.email === controlInput?.values?.email &&
-    controlInput?.values?.email === 'null');
+    controlInput?.values?.email === '');
+ 
 
+  const isNotValues = currentUser.email === controlInput.values.email &&
+    currentUser.name === controlInput.values.name;
 
-  const toggleProfileInput = (e) =>{
-    e.preventDefault();
-    setIsEditProfileInput((state) => !state);
+  const toggleProfileInput = () =>{    
+    props.setUpdateSuccessMessage('');
+    props.setIsOnEdit(true);
   };
 
   const handleProfileSubmit = (e) =>{
@@ -40,9 +41,8 @@ function Profile(props) {
       props.onUpdateUser(name, currentUser.email);
     } else {
      props.onUpdateUser(name, email);
-    }
-    setTimeout(() => setIsEditProfileInput((state) => !state), 1000);
-    controlInput.resetForm();
+    }   
+    controlInput.resetForm({ name: currentUser.name, email: currentUser.email })
   };
 
   const successMessageBtn = props.successMessage
@@ -54,8 +54,13 @@ function Profile(props) {
     ? 'profile__btn-msg-error'
     : 'profile__btn-msg-error profile__btn-msg-error_hidden';
 
-  
-    
+    useEffect(() => {      
+      if (currentUser.name && currentUser.email) {
+        controlInput.resetForm({ name: currentUser.name, email: currentUser.email });
+      }
+    // eslint-disable-next-line react-hooks/exhaustive-deps  
+    }, [currentUser,  props.isOnEdit ]);
+
   return (
     <>
       <Header
@@ -70,33 +75,33 @@ function Profile(props) {
           <form className='profile__form' onSubmit={handleProfileSubmit} noValidate>
             <label className='profile__input-container'>
               <span className='profile__span'>Имя</span>
-              <input
+              <input                
                 type='text'
                 name='name'
                 className={`profile__input ${controlInput.errors.name ? 'profile__input_type_error' : ''}`}
                 minLength='2'
-                maxLength='30'
-                value={controlInput?.values?.name ?? currentUser.name }           
+                maxLength='30'               
+                value={controlInput.values.name || ''} 
                 placeholder={currentUser.name}
                 onChange={handleInputValidation}
                 required                
-                {...(!isEditProfileInput ? {} : { disabled: true })}
+                {...( props.isOnEdit ? {} : { disabled: true })}
               />
             </label>
             <span className={errorProfileClassName}>{controlInput.errors.name}</span>
             <label className='profile__input-container'>
               <span className='profile__span'>E-mail</span>
-              <input
+              <input                
                 type='email'
-                name='email'
-                value={controlInput?.values?.email ?? currentUser.email}                
+                name='email'                
+                value={controlInput.values.email || ''}                 
                 minLength='4'
                 maxLength='40'                
                 className={`profile__input ${controlInput.errors.email ? 'profile__input_type_error' : ''}`}                
                 placeholder={currentUser.email}
                 onChange={handleInputValidation}
                 required
-                {...(!isEditProfileInput ? {} : { disabled: true })}
+                {...( props.isOnEdit ? {} : { disabled: true })}
               />
             </label>
             <span className={errorProfileClassName}>{controlInput.errors.email}</span>
@@ -105,12 +110,12 @@ function Profile(props) {
           </span>
           <span className={errorProfileMessageButton}>
             {props.isMessageProfile}
-          </span>    
-            {!isEditProfileInput && (
+          </span>      
+            {( props.isOnEdit ) && (
               <>              
                 <button
                   className='profile__btn'                  
-                  disabled={disableUserCurrentCheck || !controlInput.isValid}
+                  disabled={disableUserCurrentCheck || !controlInput.isValid || isNotValues || props.loading }
                 >
                   Сохранить
                 </button>
@@ -118,7 +123,7 @@ function Profile(props) {
             )}
           
           </form>          
-          {isEditProfileInput && (
+          {(!props.isOnEdit) &&  (
             <ul className='profile__list'>
               <li className='profile__item'>
                 <button className='profile__edit' onClick={toggleProfileInput}>
@@ -139,3 +144,5 @@ function Profile(props) {
 }
 
 export default Profile;
+
+

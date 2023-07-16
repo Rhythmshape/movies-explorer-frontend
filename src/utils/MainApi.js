@@ -129,8 +129,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  //url: 'http://localhost:3001'
-  url: 'https://api.movies.khalina.nomoredomains.work',
+  url: 'http://localhost:3001'
+ // url: 'https://api.movies.khalina.nomoredomains.work',
   
 });
 

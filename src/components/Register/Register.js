@@ -15,14 +15,17 @@ function Register(props) {
   const errorRegisterButtonClassName = props.isErrorRegisterButton
     ? 'register__error register__error_visible'
     : 'register__error';
-
+  
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
     const { name, email, password } = controlInput.values;
     props.onRegister(name, email, password);
-    controlInput.resetForm();
+    //controlInput.resetForm();
   };
+  const handleChangeForm = () => {
+    props.setIsOnEdit(false)
 
+  }
 
   return (
     <> 
@@ -32,7 +35,7 @@ function Register(props) {
             <Link to='/' className='register__logo'></Link>
             <h2 className='register__title'>Добро пожаловать!</h2>
           </header>
-          <form action='#' className='register__form' onSubmit={handleRegisterSubmit} noValidate>
+          <form action='#' className='register__form' onChange={handleChangeForm} onSubmit={handleRegisterSubmit} noValidate>
             <fieldset className='register__content'>
               <label className='register__field'>
                 <span className='register__span'>Имя</span>
@@ -83,7 +86,7 @@ function Register(props) {
                 <span className={errorRegisterClassName}>{password}</span>
               </label>
               <span className={errorRegisterButtonClassName}>{props.isRegisterMessage}</span>
-              <button className='register__submit-btn' type='submit'  disabled={!controlInput.isValid}>
+              <button className='register__submit-btn' type='submit'  disabled={/*props.loading ||*/ props.isOnEdit || !controlInput.isValid}>
                 Зарегистрироваться
               </button>
             </fieldset>

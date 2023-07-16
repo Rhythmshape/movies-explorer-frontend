@@ -42,6 +42,7 @@ function App() {
 
   // переменная состояния текущего пользователя:
   const [currentUser, setCurrentUser] = useState({});
+  const [isOnEdit, setIsOnEdit] = useState(false);
 
   // Переменная состояния для страницы movies:
   const [movies, setMovies] = useState([]);
@@ -55,6 +56,7 @@ function App() {
   // переменные состояния для страницы saved-movies:
   const [savedMovies, setSavedMovies] = useState([]);
   const [checkedSavedMovies, setCheckedSavedMovies] = useState(false);
+  const [shortSavedMovies, setShortSavedMovies] = useState([]);
 
   // переменная состояния для ожидания загрузки:
   const [loading, setLoading] = useState(false);
@@ -98,7 +100,8 @@ function App() {
         setIsLoggedIn(true)
         //navigate(path)
         setCurrentUser(userData);
-        setSavedMovies(cards);
+        setSavedMovies(cards)
+        setAllSavedMovies(cards);
         setLoading(false);
       //console.log('!!!')
       })
@@ -138,7 +141,6 @@ function App() {
   //перменные состояния кнопок при регистрации и авторизации:
   const [moreFilmCards, setMoreFilmCards] = useState(0);
   const [shownFilmCards, setShownFilmCards] = useState(0);
-
 
   // обработчик добавления дополнительно отображаемых фильмов
   const handleShowMoreFilms = () => {
@@ -228,6 +230,7 @@ function App() {
       .addMovie(movie)
       .then((data) => {
         setSavedMovies([data, ...savedMovies]);
+        
       })
       .catch((err) => {
        console.log(err);
@@ -244,39 +247,31 @@ function App() {
       localStorage.setItem('checkboxSavedMovies', !checkedSavedMovies);
     } 
   }; 
-  
+
+
+
   // функция запуска поиска фильмов по имени на странице saved-movies
   const handleSearchSavedMovies = (name) => {
-    setLoading(true);
-    mainApi
-      .getSavedMovies()
-      .then((movies) => {
-        setLoading(true);
-        setAllSavedMovies(movies);
-        localStorage.setItem('checkboxSavedMovies', checkedSavedMovies);
-        const userSavedMovies = movies.filter((movie) => {
-          return movie.owner === currentUser._id;
-        });
-        const searchFilmArray = searchMovies(userSavedMovies, name);
-        setSavedMovies(searchFilmArray);
-        setIsNotFound(!searchFilmArray.length && !isFailedServer);
-        setTimeout(() => setLoading(false), 1000);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsFailedServer(true);
-        setLoading(false);
-       });
-
-    const searchFilmArray = searchMovies(allSavedMovies, name);
+    setAllSavedMovies(allSavedMovies);
+    localStorage.setItem('checkboxSavedMovies', checkedSavedMovies);
+    const userSavedMovies = allSavedMovies.filter((movie) => {
+      return movie.owner === currentUser._id;
+    });
+    
+    const searchFilmArray = searchMovies(userSavedMovies, name);
+    const searchShortFilmsArray = searchFilmArray.slice(0);
+    const userSavedShortMovies = searchShortFilmsArray.filter((item) => item.duration <= 40);
+    setShortSavedMovies(userSavedShortMovies);
     setSavedMovies(searchFilmArray);
-    setIsNotFound(!searchFilmArray.length || !isFailedServer);
-    setTimeout(() => setLoading(false), 1000);
+    setIsNotFound((!searchFilmArray.length && !isFailedServer) || !userSavedShortMovies.length);   
+   
+    return savedMovies;
   };
 
   // регистрация и переход в систему
   function onRegister(name, email, password) {
     setIsRegisterMessage('');
+    setLoading(true);
     mainApi
       .registerUser(name, email, password)
       .then((data) => {
@@ -289,16 +284,19 @@ function App() {
         console.log(err);
         const message = checkRegisterError(err);        
         setIsRegisterMessage(message);     
-        setIsErrorRegisterButton(true);   
+        setIsErrorRegisterButton(true);
+        setIsOnEdit(true);
       })
       .finally(() => {
         setTimeout(() => setIsRegisterMessage(''), 2000);
+        setLoading(false);
       });
   };
   
   //вход в систему на страницу movies
   function onLogin(email, password) {
     setIsLoginMessage('');
+    setLoading(true);
     mainApi
       .loginUser(email, password)
       .then((res) => {
@@ -315,33 +313,42 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        setIsOnEdit(true);
         const message = checkLoginError(err);
         setIsLoginMessage(message);
         setIsErrorLoginButton(true);
       })
       .finally(() => {
+        setLoading(false);
         setTimeout(() => setIsLoginMessage(''), 2000);
       });      
   };
 
   // обновление данных о пользователе
   function onUpdateUser(name, email) {
+    //setIsOnEdit(false);
     setUpdateSuccessMessage('');
     setIsMessageProfile('');
+    setLoading(true);
     mainApi
       .updateUserInfo(name, email)
       .then((data) => {
         setCurrentUser(data);
-        showSuccessMessage();       
+        showSuccessMessage();  
+        //setIsOnEdit((state) => !state); 
+        setIsOnEdit(false);              
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err) => {        
+        console.log(err);    
+        setIsOnEdit(true);      
         const message = checkUserUpdateError(err);
-        setIsMessageProfile(message);        
+        setIsMessageProfile(message);   
+        //setIsOnEdit((state) => !state);              
       })
      .finally(() => {
+        setLoading(false);
         setTimeout(() => setIsMessageProfile(''), 1000);
-      });      
+      });   
   };
 
   // выход из системы
@@ -435,7 +442,8 @@ function App() {
                     savedMovies={savedMovies}
                     onSave={handleSaveMovie}
                     onDelete={handleDeleteMovie}
-                    allSavedMovies={allSavedMovies}                              
+                    allSavedMovies={allSavedMovies}    
+                    shortSavedMovies={shortSavedMovies}   
                   ></SavedMovies>
                 </ProtectedRoute>
               }
@@ -448,8 +456,12 @@ function App() {
                     onUpdateUser={onUpdateUser}
                     isMessageProfile={isMessageProfile}                    
                     onSignOut={onSignOut}  
-                    successMessage={updateSuccessMessage} 
-                                 
+                    successMessage={updateSuccessMessage}                     
+                    isOnEdit={isOnEdit}
+                    loading={loading}
+                    setIsOnEdit={setIsOnEdit}
+                    setUpdateSuccessMessage={setUpdateSuccessMessage}
+                           
                   />
                 </ProtectedRoute>
               }
@@ -460,6 +472,9 @@ function App() {
                 ? <Navigate to="/" />
                 : <>
                     <Register
+                      isOnEdit={isOnEdit}
+                      setIsOnEdit={setIsOnEdit}
+                      loading = {loading}
                       onRegister={onRegister}
                       isErrorRegisterButton={isErrorRegisterButton}
                       isRegisterMessage={isRegisterMessage}
@@ -473,6 +488,9 @@ function App() {
                 ? <Navigate to="/" />
                 : <>
                     <Login
+                      isOnEdit={isOnEdit}
+                      setIsOnEdit={setIsOnEdit}
+                      loading = {loading}
                       onLogin={onLogin}
                       isLoginMessage={isLoginMessage}
                       isErrorLoginButton={isErrorLoginButton}

@@ -82,14 +82,15 @@ function MoviesCardList(props) {
                     movie={movie}
                     allSavedMovies={props.allSavedMovies}
                     isOnlySaved={props.isOnlySaved}
+                    shortSavedMovies={props.shortSavedMovies}
                   />
                 );
               })}
-              {saveFilmsFilterArray.length === 0 && props.isNotFound
+              {(saveFilmsFilterArray.length === 0 && props.isNotFound) || (props.savedMovies.length === 0 && props.isNotFound)
                 ? <span className="movies-list__not-found_visible ">{NOT_FOUND_SEARCH_ERROR}</span>
                 : ''
               }
-              {saveFilmsFilterArray.length === 0 && props.isFailedServer && !props.isNotFound
+              {saveFilmsFilterArray.length === 0 && props.isFailedServer && !props.isNotFound 
                 ? <span className="movies-list__not-found_visible ">{REQUEST_SEARCH_ERROR}</span>
                 : ''
               }            

@@ -1,14 +1,29 @@
-.movie-card {
+.movie-card {  
   border-radius: 10px;
   background-color: #FDFDFD;
-  box-shadow: 0 16px 24px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 16px 24px 0 rgba(0, 0, 0, 0.05); 
+}
+
+.movie-card__image-frame {
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 .movie-card__image {
+  
+  display:block;
   margin-bottom: 14px;
   min-width: 270px;
   object-fit: cover;
   height: 151px;  
+  width: 100%;
+  /*
+  width: 100%;
+  height: auto;
+  display:block;
+  margin-bottom: 14px;  
+  object-fit: cover;
+  */
 }
 
 .movie-card__title {

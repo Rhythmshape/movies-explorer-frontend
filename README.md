@@ -1,6 +1,10 @@
 ## movies-explorer-frontend
 # Frontend-часть диплома в рамках курса "Веб-разработчик" на Яндекс-Практикуме.
 
+## Описание проекта 
+Movies Explorer - это интерактивная страница, на которой пользователи могут зарегестрироваться, искать фильмы по запросу и сохранять их в личном кабинете. 
+
+
 ## При работе были использованы:
 - Методология БЭМ
 - Адаптивная верстка сайта для различных экранов 
@@ -8,6 +12,11 @@
 - Медиазапросы
 - Flexbox-верстка
 - Grid Layout
+- Промисы
+- Асинхронность
+- Хуки
+
+
 
 ## Основные роуты:
 - - / - презентационная страница
@@ -18,8 +27,16 @@
 - - /profile - страница редатирования профиля
 - - /notfound - страница 404
 
-## Сcылка на Figma:
-# https://disk.yandex.ru/d/DGTd-AujlaBR9g
 
-## Ссылка на репозиторий проекта:
-# https://github.com/Rhythmshape/movies-explorer-frontend
+## Публичный IP: 
+   51.250.76.251
+
+## Сcылка на макет Figma, по которому осуществлялась верстка:
+   https://disk.yandex.ru/d/DGTd-AujlaBR9g
+
+## Ссылка на репозиторий проекта (level-3):
+## https://github.com/Rhythmshape/movies-explorer-frontend/pull/2
+
+### Бэкенд:  api.movies.khalina.nomoredomains.work
+
+## Фронтенд сайта:  https://movies.khalina.nomoredomains.work

@@ -30,6 +30,33 @@
   cursor: pointer;
 }
 
+.movies-list__not-found {
+  display: none;
+}
+
+.movies-list__not-found_visible {
+  display: block;
+  margin: 0;
+  font-size: 23px;
+  text-align: center;
+  color: #3456F3;
+  padding-top: 10px;
+
+}
+
+.movies-list__error{
+  display: none;
+}
+
+.movies-list__error_visible{  
+  display: block;
+  color: #FF3055;
+  margin: 0;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+}
+
 .movies-list__btn:hover {
   opacity: 0.8;
 }
@@ -61,5 +88,9 @@
   }
   .movies-list__btn {
     width: calc(100% - 10px * 2);
+  }
+
+  .movies-list__not-found_visible{
+    font-size: 18px;
   }
 }
